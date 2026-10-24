@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHodicha</title>
+    <title>SH AI</title>
     <style>
         /* Gemini interfeysiga o'xshash fon va shriftlar */
         body {
             margin: 0;
             padding: 0;
-            background-color: #000080; /* Gemini quyuq foni */
-            color: #191970;
+            background-color: #131314; /* Gemini quyuq foni */
+            color: #e3e3e3;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             flex-direction: column;
@@ -49,7 +49,7 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #000080, #9b72cb, #d96570);
+            background: linear-gradient(135deg, #4285f4, #9b72cb, #d96570);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -60,7 +60,7 @@
 
         /* Xabar matni */
         .message-content {
-            background-color: #191970;
+            background-color: #1e1f22;
             padding: 12px 18px;
             border-radius: 12px;
             font-size: 16px;
@@ -85,14 +85,14 @@
             flex: 1;
             background: transparent;
             border: none;
-            color: #00008B;
+            color: #e3e3e3;
             font-size: 16px;
             outline: none;
             padding: 8px;
         }
 
         .input-container input::placeholder {
-            color: #191970;
+            color: #8e918f;
         }
 
         .input-container button {
@@ -122,7 +122,7 @@
         <!-- AI xabari -->
         <div class="message">
             <div class="avatar">SH</div>
-            <div class="message-content">Xush kelibsiz</div>
+            <div class="message-content">Salom Shodiyona</div>
         </div>
     </div>
 
@@ -160,7 +160,7 @@
                 aiMsgDiv.className = 'message';
                 aiMsgDiv.innerHTML = `
                     <div class="avatar">SH</div>
-                    <div class="message-content">chunarli shodiyona</div>
+                    <div class="message-content">Chunarli Shodiyona</div>
                 `;
                 chatContainer.appendChild(aiMsgDiv);
                 chatContainer.scrollTop = chatContainer.scrollHeight;
