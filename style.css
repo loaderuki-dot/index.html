@@ -1,0 +1,168 @@
+:root{
+  --bg:#090d18;
+  --card:#111827;
+  --text:#edf2ff;
+  --muted:#a5b0c6;
+  --green:#66e3d4;
+  --blue:#80a7ff;
+  --border:rgba(255,255,255,.1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:115px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:16px/1.7 Arial,sans-serif;
+  overflow-wrap:anywhere;
+}
+a{color:var(--green);text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1100px,91%);margin:auto}
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(9,13,24,.96);
+  border-bottom:1px solid var(--border);
+}
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:15px;
+  padding:17px 0;
+}
+.logo{font-size:26px;font-weight:800;color:white}
+.logo span,h1 span{color:var(--green)}
+.links,.actions{display:flex;flex-wrap:wrap;gap:14px}
+.links{font-size:14px}
+.links a:hover{color:white}
+section{padding:50px 0}
+.hero{
+  padding:80px 0;
+  background:radial-gradient(ellipse at 85% 15%,#31578944,transparent 65%);
+}
+h1{
+  font-size:clamp(38px,6vw,66px);
+  line-height:1.13;
+  letter-spacing:-1.7px;
+  max-width:850px;
+}
+h2{font-size:clamp(27px,4vw,36px);line-height:1.3}
+h3{line-height:1.4}
+p{color:var(--muted)}
+.hero p{max-width:650px;font-size:18px}
+.badge{
+  display:inline-block;
+  padding:6px 14px;
+  color:var(--green);
+  border:1px solid #66e3d444;
+  border-radius:30px;
+  font-size:13px;
+}
+.hero-note{margin-top:22px;font-size:13px;color:var(--muted)}
+.eyebrow{color:var(--green);font-size:12px;letter-spacing:1.5px}
+.btn,button{
+  display:inline-block;
+  padding:11px 17px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#17243a;
+  color:var(--text);
+}
+.btn:hover,button:hover{border-color:var(--green)}
+.primary{
+  background:linear-gradient(120deg,var(--blue),var(--green));
+  color:#07121c;
+  font-weight:700;
+}
+.actions{align-items:center;margin-top:18px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px;
+}
+.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{
+  min-width:0;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+}
+.pad{padding:24px}
+.step{font-size:25px;color:var(--green)}
+.filters{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:15px;
+  margin:25px 0 15px;
+}
+.filters label{font-size:13px;color:var(--muted)}
+input[type=search],select{
+  display:block;
+  width:100%;
+  padding:13px;
+  margin-top:7px;
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:11px;
+}
+.player{
+  aspect-ratio:16/9;
+  position:relative;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#192b47,#0a1020);
+}
+.player iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+.play-button{max-width:90%;background:#66e3d4;color:#07121c;font-weight:bold}
+.task{
+  padding:13px;
+  border-left:3px solid var(--green);
+  background:#66e3d409;
+  font-size:14px;
+}
+.small{font-size:13px}
+button[aria-pressed=true]{border-color:var(--green);color:var(--green)}
+fieldset{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:17px;
+  margin-bottom:20px;
+}
+legend{padding:0 8px;font-weight:bold}
+.answer{display:block;padding:8px 0;cursor:pointer}
+input[type=radio],input[type=checkbox]{accent-color:var(--green);margin-right:9px}
+.quote{font-size:clamp(21px,3vw,28px);color:var(--text)}
+.check{display:block;padding:12px 0;border-bottom:1px solid var(--border)}
+.timer{
+  font-size:64px;
+  font-variant-numeric:tabular-nums;
+  color:var(--green);
+}
+#quizResult{white-space:pre-line}
+footer{padding:28px 0;border-top:1px solid var(--border);color:var(--muted)}
+:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+[hidden]{display:none!important}
+@media(max-width:700px){
+  .grid,.three,.filters{grid-template-columns:1fr}
+  nav{align-items:flex-start;flex-direction:column;gap:8px}
+  .links{font-size:13px;gap:12px}
+  section{padding:35px 0}
+  .hero{padding:45px 0}
+  h1{letter-spacing:-1px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
