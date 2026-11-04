@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexorya - Premium Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-cube"></i>
+                <span>Nexorya</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#lessons" class="nav-link active" data-target="lessons"><i class="fa-solid fa-graduation-cap"></i> Video Darsliklar</a>
+                <a href="#focus" class="nav-link" data-target="focus"><i class="fa-solid fa-clock"></i> Fokus & Idea</a>
+                <a href="#music" class="nav-link" data-target="music"><i class="fa-solid fa-music"></i> Musiqa Pleyer</a>
+                <a href="#gallery" class="nav-link" data-target="gallery"><i class="fa-solid fa-images"></i> Galereya</a>
+                <a href="#videos" class="nav-link" data-target="videos"><i class="fa-solid fa-video"></i> Videolar</a>
+                <a href="#wiki" class="nav-link" data-target="wiki"><i class="fa-solid fa-book"></i> Tushunchalar</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="globalSearch" placeholder="Platformadan qidirish...">
+                </div>
+                <div class="user-profile">
+                    <i class="fa-solid fa-bell"></i>
+                    <div class="avatar">NX</div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- 1. Video Darsliklar -->
+                <section id="lessons" class="section active">
+                    <h2>Video Darsliklar</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Barchasi</button>
+                        <button class="filter-btn" data-filter="frontend">Frontend</button>
+                        <button class="filter-btn" data-filter="design">Dizayn</button>
+                        <button class="filter-btn" data-filter="ai">Sun'iy Intellekt</button>
+                    </div>
+                    <div class="grid-container" id="lessonsGrid">
+                        <!-- Kartochkalar JS orqali to'ldiriladi -->
+                    </div>
+                </section>
+
+                <!-- 2. Fokus & Idea -->
+                <section id="focus" class="section">
+                    <h2>Fokus Idea & Pomodoro</h2>
+                    <div class="focus-grid">
+                        <div class="glass-card pomodoro-card">
+                            <h3>Pomodoro Taymer</h3>
+                            <div class="timer-display" id="timerDisplay">25:00</div>
+                            <div class="timer-controls">
+                                <button id="startTimer" class="btn primary">Boshlash</button>
+                                <button id="pauseTimer" class="btn secondary">To'xtatib turish</button>
+                                <button id="resetTimer" class="btn danger">Qayta tiklash</button>
+                            </div>
+                        </div>
+                        <div class="glass-card idea-card">
+                            <h3>Fokus G'oyalar Doskasi</h3>
+                            <div class="idea-input-group">
+                                <input type="text" id="ideaInput" placeholder="Yangi g'oya yozing...">
+                                <button id="addIdeaBtn" class="btn primary"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                            <ul id="ideasList" class="idea-list"></ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Musiqa Pleyer -->
+                <section id="music" class="section">
+                    <h2>Fokus Musiqalari</h2>
+                    <div class="glass-card music-player-card">
+                        <div class="music-info">
+                            <h3 id="songTitle">Lofi Chill Beats</h3>
+                            <p id="songArtist">Nexorya Audio</p>
+                        </div>
+                        <div class="visualizer">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                        <div class="music-controls">
+                            <button id="prevSong" class="btn-icon"><i class="fa-solid fa-backward-step"></i></button>
+                            <button id="playSong" class="btn-icon main"><i class="fa-solid fa-play"></i></button>
+                            <button id="nextSong" class="btn-icon"><i class="fa-solid fa-forward-step"></i></button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. Galereya -->
+                <section id="gallery" class="section">
+                    <h2>Kreativ Rasmlar Galereyasi</h2>
+                    <div class="grid-container gallery-grid" id="galleryGrid"></div>
+                </section>
+
+                <!-- 5. Videolar -->
+                <section id="videos" class="section">
+                    <h2>Maxsus Videolar</h2>
+                    <div class="grid-container" id="videosGrid"></div>
+                </section>
+
+                <!-- 6. Tushunchalar (Wiki) -->
+                <section id="wiki" class="section">
+                    <h2>Tushunchalar & Bilimlar Ombori</h2>
+                    <div class="search-box wiki-search">
+                        <i class="fa-solid fa-book-open"></i>
+                        <input type="text" id="wikiSearchInput" placeholder="Atamani qidiring (masalan: API, Glassmorphism)...">
+                    </div>
+                    <div class="grid-container" id="wikiGrid"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="video-container">
+                <iframe id="modalIframe" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
