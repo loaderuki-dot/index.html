@@ -1,136 +1,241 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexorya - Premium Platform</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexorya — Film va rasm qidiruv</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #0b0f17;
+    color: #fff;
+    min-height: 100vh;
+  }
+  header {
+    padding: 24px;
+    text-align: center;
+    background: linear-gradient(90deg, #111827, #1e293b);
+  }
+  header h1 { font-size: 30px; margin-bottom: 8px; }
+  header p { color: #94a3b8; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  .search-box {
+    display: flex;
+    gap: 10px;
+    margin: 24px 0;
+  }
+  input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #111827;
+    color: #fff;
+    font-size: 16px;
+  }
+  button {
+    padding: 14px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #ef4444;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+  .tab {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #1e293b;
+    cursor: pointer;
+  }
+  .tab.active { background: #ef4444; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .card img { width: 100%; height: 270px; object-fit: cover; }
+  .card-info { padding: 12px; }
+  .card-info h3 { font-size: 16px; margin-bottom: 6px; }
+  .card-info p { color: #94a3b8; font-size: 13px; }
+  .result { margin-top: 20px; }
+  .trailer {
+    margin-top: 20px;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 14px;
+    border: none;
+  }
+  .watch-links { margin-top: 14px; }
+  .watch-links a {
+    display: inline-block;
+    margin: 5px 8px 5px 0;
+    padding: 10px 14px;
+    background: #1e293b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+  }
+  .credit {
+    margin-top: 30px;
+    font-size: 13px;
+    color: #94a3b8;
+    text-align: center;
+  }
+  .credit a { color: #60a5fa; }
+</style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <i class="fa-solid fa-cube"></i>
-                <span>Nexorya</span>
-            </div>
-            <nav class="nav-menu">
-                <a href="#lessons" class="nav-link active" data-target="lessons"><i class="fa-solid fa-graduation-cap"></i> Video Darsliklar</a>
-                <a href="#focus" class="nav-link" data-target="focus"><i class="fa-solid fa-clock"></i> Fokus & Idea</a>
-                <a href="#music" class="nav-link" data-target="music"><i class="fa-solid fa-music"></i> Musiqa Pleyer</a>
-                <a href="#gallery" class="nav-link" data-target="gallery"><i class="fa-solid fa-images"></i> Galereya</a>
-                <a href="#videos" class="nav-link" data-target="videos"><i class="fa-solid fa-video"></i> Videolar</a>
-                <a href="#wiki" class="nav-link" data-target="wiki"><i class="fa-solid fa-book"></i> Tushunchalar</a>
-            </nav>
-        </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="top-header">
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="globalSearch" placeholder="Platformadan qidirish...">
-                </div>
-                <div class="user-profile">
-                    <i class="fa-solid fa-bell"></i>
-                    <div class="avatar">NX</div>
-                </div>
-            </header>
+<header>
+  <h1>Nexorya Media</h1>
+  <p>Film, serial va rasm qidiruv platformasi</p>
+</header>
 
-            <div class="content-body">
-                <!-- 1. Video Darsliklar -->
-                <section id="lessons" class="section active">
-                    <h2>Video Darsliklar</h2>
-                    <div class="filter-buttons">
-                        <button class="filter-btn active" data-filter="all">Barchasi</button>
-                        <button class="filter-btn" data-filter="frontend">Frontend</button>
-                        <button class="filter-btn" data-filter="design">Dizayn</button>
-                        <button class="filter-btn" data-filter="ai">Sun'iy Intellekt</button>
-                    </div>
-                    <div class="grid-container" id="lessonsGrid">
-                        <!-- Kartochkalar JS orqali to'ldiriladi -->
-                    </div>
-                </section>
+<div class="container">
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('movie')">Film va seriallar</div>
+    <div class="tab" onclick="switchTab('image')">Rasmlar</div>
+  </div>
 
-                <!-- 2. Fokus & Idea -->
-                <section id="focus" class="section">
-                    <h2>Fokus Idea & Pomodoro</h2>
-                    <div class="focus-grid">
-                        <div class="glass-card pomodoro-card">
-                            <h3>Pomodoro Taymer</h3>
-                            <div class="timer-display" id="timerDisplay">25:00</div>
-                            <div class="timer-controls">
-                                <button id="startTimer" class="btn primary">Boshlash</button>
-                                <button id="pauseTimer" class="btn secondary">To'xtatib turish</button>
-                                <button id="resetTimer" class="btn danger">Qayta tiklash</button>
-                            </div>
-                        </div>
-                        <div class="glass-card idea-card">
-                            <h3>Fokus G'oyalar Doskasi</h3>
-                            <div class="idea-input-group">
-                                <input type="text" id="ideaInput" placeholder="Yangi g'oya yozing...">
-                                <button id="addIdeaBtn" class="btn primary"><i class="fa-solid fa-plus"></i></button>
-                            </div>
-                            <ul id="ideasList" class="idea-list"></ul>
-                        </div>
-                    </div>
-                </section>
+  <div class="search-box">
+    <input id="query" placeholder="Film, serial yoki rasm nomini yozing...">
+    <button onclick="search()">Qidirish</button>
+  </div>
 
-                <!-- 3. Musiqa Pleyer -->
-                <section id="music" class="section">
-                    <h2>Fokus Musiqalari</h2>
-                    <div class="glass-card music-player-card">
-                        <div class="music-info">
-                            <h3 id="songTitle">Lofi Chill Beats</h3>
-                            <p id="songArtist">Nexorya Audio</p>
-                        </div>
-                        <div class="visualizer">
-                            <span></span><span></span><span></span><span></span><span></span>
-                        </div>
-                        <div class="music-controls">
-                            <button id="prevSong" class="btn-icon"><i class="fa-solid fa-backward-step"></i></button>
-                            <button id="playSong" class="btn-icon main"><i class="fa-solid fa-play"></i></button>
-                            <button id="nextSong" class="btn-icon"><i class="fa-solid fa-forward-step"></i></button>
-                        </div>
-                    </div>
-                </section>
+  <div id="movieSection" class="result">
+    <div id="movieResults" class="grid"></div>
+    <div id="movieDetail"></div>
+  </div>
 
-                <!-- 4. Galereya -->
-                <section id="gallery" class="section">
-                    <h2>Kreativ Rasmlar Galereyasi</h2>
-                    <div class="grid-container gallery-grid" id="galleryGrid"></div>
-                </section>
+  <div id="imageSection" class="result" style="display:none;">
+    <div id="imageResults" class="grid"></div>
+  </div>
+</div>
 
-                <!-- 5. Videolar -->
-                <section id="videos" class="section">
-                    <h2>Maxsus Videolar</h2>
-                    <div class="grid-container" id="videosGrid"></div>
-                </section>
+<div class="credit">
+  Bu sayt TMDB API va Unsplash API’dan foydalanadi.
+  <br>
+  “This product uses the TMDB API but is not endorsed or certified by TMDB.”
+</div>
 
-                <!-- 6. Tushunchalar (Wiki) -->
-                <section id="wiki" class="section">
-                    <h2>Tushunchalar & Bilimlar Ombori</h2>
-                    <div class="search-box wiki-search">
-                        <i class="fa-solid fa-book-open"></i>
-                        <input type="text" id="wikiSearchInput" placeholder="Atamani qidiring (masalan: API, Glassmorphism)...">
-                    </div>
-                    <div class="grid-container" id="wikiGrid"></div>
-                </section>
-            </div>
-        </main>
-    </div>
+<script>
+const TMDB_API_KEY = "TMDB_API_KEY_BU_YERGA";
+const UNSPLASH_ACCESS_KEY = "UNSPLASH_ACCESS_KEY_BU_YERGA";
+const TMDB_IMAGE = "https://image.tmdb.org/t/p/w500";
+let currentTab = "movie";
 
-    <!-- Video Modal -->
-    <div class="modal" id="videoModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="video-container">
-                <iframe id="modalIframe" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById("movieSection").style.display = tab === "movie" ? "block" : "none";
+  document.getElementById("imageSection").style.display = tab === "image" ? "block" : "none";
+
+  document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
+  event.target.classList.add("active");
+}
+
+async function search() {
+  const query = document.getElementById("query").value.trim();
+  if (!query) return alert("Qidiruv so‘zini kiriting");
+
+  if (currentTab === "movie") {
+    await searchMovies(query);
+  } else {
+    await searchImages(query);
+  }
+}
+
+async function searchMovies(query) {
+  const url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&language=ru-RU`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const box = document.getElementById("movieResults");
+  box.innerHTML = "";
+
+  data.results
+    .filter(item => item.media_type === "movie" || item.media_type === "tv")
+    .forEach(item => {
+      const title = item.title || item.name;
+      const poster = item.poster_path ? TMDB_IMAGE + item.poster_path : "";
+      const date = item.release_date || item.first_air_date || "";
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.onclick = () => showMovie(item);
+
+      card.innerHTML = `
+        <img src="${poster}" alt="${title}">
+        <div class="card-info">
+          <h3>${title}</h3>
+          <p>${date} • Reyting: ${item.vote_average || 0}</p>
         </div>
-    </div>
+      `;
 
-    <script src="script.js"></script>
+      box.appendChild(card);
+    });
+}
+
+async function showMovie(item) {
+  const type = item.media_type;
+  const id = item.id;
+  const url = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${TMDB_API_KEY}&language=ru-RU`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const trailer = data.results.find(video => video.site === "YouTube" && video.type === "Trailer");
+  const title = item.title || item.name;
+
+  document.getElementById("movieDetail").innerHTML = `
+    <h2>${title}</h2>
+    <p>${item.overview || "Tavsif mavjud emas."}</p>
+    ${trailer ? `<iframe class="trailer" src="https://www.youtube.com/embed/${trailer.key}" allowfullscreen></iframe>` : ""}
+    <div class="watch-links">
+      <a href="https://www.themoviedb.org/${type}/${id}" target="_blank">TMDB’da ko‘rish</a>
+      <a href="https://www.justwatch.com/" target="_blank">Qonuniy platformalarda topish</a>
+    </div>
+  `;
+
+  document.getElementById("movieDetail").scrollIntoView({ behavior: "smooth" });
+}
+
+async function searchImages(query) {
+  const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=24&client_id=${UNSPLASH_ACCESS_KEY}`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const box = document.getElementById("imageResults");
+  box.innerHTML = "";
+
+  data.results.forEach(photo => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <img src="${photo.urls.small}" alt="${photo.alt_description || "Rasm"}">
+      <div class="card-info">
+        <h3>${photo.user.name}</h3>
+        <p><a href="${photo.links.html}?utm_source=Nexorya&utm_medium=referral" target="_blank">Unsplash’da ko‘rish</a></p>
+      </div>
+    `;
+
+    box.appendChild(card);
+  });
+}
+
+document.getElementById("query").addEventListener("keydown", e => {
+  if (e.key === "Enter") search();
+});
+</script>
+
 </body>
 </html>
