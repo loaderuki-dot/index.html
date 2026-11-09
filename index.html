@@ -3,239 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexorya — Film va rasm qidiruv</title>
+<title>Nexorya — Free Online IT Tools</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: Arial, sans-serif;
-    background: #0b0f17;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e1b4b);
     color: #fff;
     min-height: 100vh;
   }
   header {
-    padding: 24px;
+    padding: 60px 20px;
     text-align: center;
-    background: linear-gradient(90deg, #111827, #1e293b);
+    background: radial-gradient(circle at top, rgba(99,102,241,0.25), transparent);
   }
-  header h1 { font-size: 30px; margin-bottom: 8px; }
-  header p { color: #94a3b8; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  header h1 {
+    font-size: 42px;
+    margin-bottom: 12px;
+  }
+  header p {
+    color: #94a3b8;
+    font-size: 18px;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
   .search-box {
     display: flex;
     gap: 10px;
-    margin: 24px 0;
+    margin-bottom: 40px;
   }
   input {
     flex: 1;
-    padding: 14px;
-    border-radius: 10px;
+    padding: 16px;
+    border-radius: 12px;
     border: 1px solid #334155;
-    background: #111827;
+    background: #0f172a;
     color: #fff;
     font-size: 16px;
   }
   button {
-    padding: 14px 22px;
+    padding: 16px 26px;
     border: none;
-    border-radius: 10px;
-    background: #ef4444;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
     color: #fff;
     font-weight: bold;
     cursor: pointer;
   }
-  .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-  .tab {
-    padding: 10px 18px;
-    border-radius: 999px;
-    background: #1e293b;
-    cursor: pointer;
-  }
-  .tab.active { background: #ef4444; }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
   }
   .card {
-    background: #111827;
-    border: 1px solid #1f2937;
-    border-radius: 14px;
-    overflow: hidden;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 22px;
     cursor: pointer;
+    transition: 0.3s;
   }
-  .card img { width: 100%; height: 270px; object-fit: cover; }
-  .card-info { padding: 12px; }
-  .card-info h3 { font-size: 16px; margin-bottom: 6px; }
-  .card-info p { color: #94a3b8; font-size: 13px; }
-  .result { margin-top: 20px; }
-  .trailer {
-    margin-top: 20px;
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    border-radius: 14px;
-    border: none;
+  .card:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 10px 30px rgba(99,102,241,0.25);
   }
-  .watch-links { margin-top: 14px; }
-  .watch-links a {
-    display: inline-block;
-    margin: 5px 8px 5px 0;
-    padding: 10px 14px;
-    background: #1e293b;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
+  .card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
   }
-  .credit {
-    margin-top: 30px;
-    font-size: 13px;
+  .card p {
     color: #94a3b8;
-    text-align: center;
+    font-size: 14px;
   }
-  .credit a { color: #60a5fa; }
+  .icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+  footer {
+    margin-top: 60px;
+    padding: 30px;
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Nexorya Media</h1>
-  <p>Film, serial va rasm qidiruv platformasi</p>
+  <h1>Nexorya</h1>
+  <p>Free Online IT Tools — Fast, Simple, Useful</p>
 </header>
 
 <div class="container">
-  <div class="tabs">
-    <div class="tab active" onclick="switchTab('movie')">Film va seriallar</div>
-    <div class="tab" onclick="switchTab('image')">Rasmlar</div>
-  </div>
-
   <div class="search-box">
-    <input id="query" placeholder="Film, serial yoki rasm nomini yozing...">
-    <button onclick="search()">Qidirish</button>
+    <input placeholder="Search tools...">
+    <button>Search</button>
   </div>
 
-  <div id="movieSection" class="result">
-    <div id="movieResults" class="grid"></div>
-    <div id="movieDetail"></div>
-  </div>
-
-  <div id="imageSection" class="result" style="display:none;">
-    <div id="imageResults" class="grid"></div>
-  </div>
-</div>
-
-<div class="credit">
-  Bu sayt TMDB API va Unsplash API’dan foydalanadi.
-  <br>
-  “This product uses the TMDB API but is not endorsed or certified by TMDB.”
-</div>
-
-<script>
-const TMDB_API_KEY = "ec610445afdaacb9165689f13f34ed8f";
-const UNSPLASH_ACCESS_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYzYxMDQ0NWFmZGFhY2I5MTY1Njg5ZjEzZjM0ZWQ4ZiIsIm5iZiI6MTc5NDIxNzgzNC43NTksInN1YiI6IjZhZjE5NzZhNDA0YTI2YjNiNGE5NjM2MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MQR-6xE4oBgANXRgBcpu48x9ZwKZ9FQ7O51u03XWBdM";
-const TMDB_IMAGE = "https://image.tmdb.org/t/p/w500";
-let currentTab = "movie";
-
-function switchTab(tab) {
-  currentTab = tab;
-  document.getElementById("movieSection").style.display = tab === "movie" ? "block" : "none";
-  document.getElementById("imageSection").style.display = tab === "image" ? "block" : "none";
-
-  document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
-  event.target.classList.add("active");
-}
-
-async function search() {
-  const query = document.getElementById("query").value.trim();
-  if (!query) return alert("Qidiruv so‘zini kiriting");
-
-  if (currentTab === "movie") {
-    await searchMovies(query);
-  } else {
-    await searchImages(query);
-  }
-}
-
-async function searchMovies(query) {
-  const url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&language=ru-RU`;
-  const response = await fetch(url);
-  const data = await response.json();
-
-  const box = document.getElementById("movieResults");
-  box.innerHTML = "";
-
-  data.results
-    .filter(item => item.media_type === "movie" || item.media_type === "tv")
-    .forEach(item => {
-      const title = item.title || item.name;
-      const poster = item.poster_path ? TMDB_IMAGE + item.poster_path : "";
-      const date = item.release_date || item.first_air_date || "";
-
-      const card = document.createElement("div");
-      card.className = "card";
-      card.onclick = () => showMovie(item);
-
-      card.innerHTML = `
-        <img src="${poster}" alt="${title}">
-        <div class="card-info">
-          <h3>${title}</h3>
-          <p>${date} • Reyting: ${item.vote_average || 0}</p>
-        </div>
-      `;
-
-      box.appendChild(card);
-    });
-}
-
-async function showMovie(item) {
-  const type = item.media_type;
-  const id = item.id;
-  const url = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${TMDB_API_KEY}&language=ru-RU`;
-  const response = await fetch(url);
-  const data = await response.json();
-
-  const trailer = data.results.find(video => video.site === "YouTube" && video.type === "Trailer");
-  const title = item.title || item.name;
-
-  document.getElementById("movieDetail").innerHTML = `
-    <h2>${title}</h2>
-    <p>${item.overview || "Tavsif mavjud emas."}</p>
-    ${trailer ? `<iframe class="trailer" src="https://www.youtube.com/embed/${trailer.key}" allowfullscreen></iframe>` : ""}
-    <div class="watch-links">
-      <a href="https://www.themoviedb.org/${type}/${id}" target="_blank">TMDB’da ko‘rish</a>
-      <a href="https://www.justwatch.com/" target="_blank">Qonuniy platformalarda topish</a>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🔐</div>
+      <h3>Password Generator</h3>
+      <p>Create strong and secure passwords instantly.</p>
     </div>
-  `;
 
-  document.getElementById("movieDetail").scrollIntoView({ behavior: "smooth" });
-}
+    <div class="card">
+      <div class="icon">📱</div>
+      <h3>QR Code Generator</h3>
+      <p>Turn any link or text into a QR code.</p>
+    </div>
 
-async function searchImages(query) {
-  const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=24&client_id=${UNSPLASH_ACCESS_KEY}`;
-  const response = await fetch(url);
-  const data = await response.json();
+    <div class="card">
+      <div class="icon">💱</div>
+      <h3>Currency Converter</h3>
+      <p>Convert USD, EUR, UZS and more.</p>
+    </div>
 
-  const box = document.getElementById("imageResults");
-  box.innerHTML = "";
+    <div class="card">
+      <div class="icon">🔤</div>
+      <h3>Text Case Converter</h3>
+      <p>Convert text to UPPER, lower or Title Case.</p>
+    </div>
 
-  data.results.forEach(photo => {
-    const card = document.createElement("div");
-    card.className = "card";
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>Word Counter</h3>
+      <p>Count words, characters and sentences.</p>
+    </div>
 
-    card.innerHTML = `
-      <img src="${photo.urls.small}" alt="${photo.alt_description || "Rasm"}">
-      <div class="card-info">
-        <h3>${photo.user.name}</h3>
-        <p><a href="${photo.links.html}?utm_source=Nexorya&utm_medium=referral" target="_blank">Unsplash’da ko‘rish</a></p>
-      </div>
-    `;
+    <div class="card">
+      <div class="icon">🖼️</div>
+      <h3>Image Compressor</h3>
+      <p>Reduce image size without losing quality.</p>
+    </div>
 
-    box.appendChild(card);
-  });
-}
+    <div class="card">
+      <div class="icon">🧩</div>
+      <h3>JSON Formatter</h3>
+      <p>Format and validate JSON data easily.</p>
+    </div>
 
-document.getElementById("query").addEventListener("keydown", e => {
-  if (e.key === "Enter") search();
-});
-</script>
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h3>Color Picker</h3>
+      <p>Get HEX and RGB color codes.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Nexorya. All rights reserved.
+</footer>
 
 </body>
 </html>
