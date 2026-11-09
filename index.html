@@ -13,82 +13,65 @@
     min-height: 100vh;
   }
   header {
-    padding: 60px 20px;
+    padding: 50px 20px;
     text-align: center;
     background: radial-gradient(circle at top, rgba(99,102,241,0.25), transparent);
   }
-  header h1 {
-    font-size: 42px;
-    margin-bottom: 12px;
-  }
-  header p {
-    color: #94a3b8;
-    font-size: 18px;
-  }
+  header h1 { font-size: 38px; margin-bottom: 10px; }
+  header p { color: #94a3b8; font-size: 18px; }
   .container {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 30px 20px;
   }
-  .search-box {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 40px;
+  .tool {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
   }
-  input {
-    flex: 1;
-    padding: 16px;
-    border-radius: 12px;
+  .tool h2 { margin-bottom: 14px; }
+  input, textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
     border: 1px solid #334155;
     background: #0f172a;
     color: #fff;
     font-size: 16px;
+    margin-bottom: 12px;
   }
+  textarea { height: 120px; resize: vertical; }
   button {
-    padding: 16px 26px;
+    padding: 12px 22px;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     background: linear-gradient(90deg, #6366f1, #8b5cf6);
     color: #fff;
     font-weight: bold;
     cursor: pointer;
+    margin-right: 8px;
   }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 20px;
+  .result {
+    margin-top: 14px;
+    padding: 14px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    word-break: break-all;
   }
-  .card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 22px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  .card:hover {
-    transform: translateY(-6px);
-    background: rgba(255,255,255,0.08);
-    box-shadow: 0 10px 30px rgba(99,102,241,0.25);
-  }
-  .card h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
-  }
-  .card p {
-    color: #94a3b8;
-    font-size: 14px;
-  }
-  .icon {
-    font-size: 30px;
-    margin-bottom: 12px;
+  .qr-img {
+    margin-top: 14px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
   }
   footer {
-    margin-top: 60px;
-    padding: 30px;
+    margin-top: 50px;
+    padding: 25px;
     text-align: center;
     color: #64748b;
-    font-size: 14px;
   }
 </style>
 </head>
@@ -96,69 +79,106 @@
 
 <header>
   <h1>Nexorya</h1>
-  <p>Free Online IT Tools — Fast, Simple, Useful</p>
+  <p>Free Online IT Tools</p>
 </header>
 
 <div class="container">
-  <div class="search-box">
-    <input placeholder="Search tools...">
-    <button>Search</button>
+
+  <div class="tool">
+    <h2>🔐 Password Generator</h2>
+    <input id="passLength" type="number" value="16" min="8" max="64">
+    <button onclick="generatePassword()">Generate Password</button>
+    <div id="passwordResult" class="result">Parol bu yerda chiqadi</div>
   </div>
 
-  <div class="grid">
-    <div class="card">
-      <div class="icon">🔐</div>
-      <h3>Password Generator</h3>
-      <p>Create strong and secure passwords instantly.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📱</div>
-      <h3>QR Code Generator</h3>
-      <p>Turn any link or text into a QR code.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">💱</div>
-      <h3>Currency Converter</h3>
-      <p>Convert USD, EUR, UZS and more.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🔤</div>
-      <h3>Text Case Converter</h3>
-      <p>Convert text to UPPER, lower or Title Case.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📊</div>
-      <h3>Word Counter</h3>
-      <p>Count words, characters and sentences.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🖼️</div>
-      <h3>Image Compressor</h3>
-      <p>Reduce image size without losing quality.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🧩</div>
-      <h3>JSON Formatter</h3>
-      <p>Format and validate JSON data easily.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🎨</div>
-      <h3>Color Picker</h3>
-      <p>Get HEX and RGB color codes.</p>
-    </div>
+  <div class="tool">
+    <h2>📱 QR Code Generator</h2>
+    <input id="qrText" placeholder="Link yoki matn yozing">
+    <button onclick="generateQR()">Generate QR</button>
+    <div id="qrResult"></div>
   </div>
+
+  <div class="tool">
+    <h2>🔤 Text Case Converter</h2>
+    <textarea id="textInput" placeholder="Matn kiriting"></textarea>
+    <button onclick="toUpperCaseText()">UPPERCASE</button>
+    <button onclick="toLowerCaseText()">lowercase</button>
+    <button onclick="toTitleCase()">Title Case</button>
+    <div id="textResult" class="result">Natija bu yerda chiqadi</div>
+  </div>
+
+  <div class="tool">
+    <h2>📊 Word Counter</h2>
+    <textarea id="countInput" placeholder="Matn kiriting"></textarea>
+    <button onclick="countWords()">Count</button>
+    <div id="countResult" class="result">Natija bu yerda chiqadi</div>
+  </div>
+
 </div>
 
 <footer>
   © 2026 Nexorya. All rights reserved.
 </footer>
+
+<script>
+function generatePassword() {
+  const length = document.getElementById("passLength").value;
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+  let password = "";
+
+  for (let i = 0; i < length; i++) {
+    password += chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  document.getElementById("passwordResult").innerText = password;
+}
+
+function generateQR() {
+  const text = document.getElementById("qrText").value;
+  if (!text) return alert("Matn kiriting");
+
+  const url = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(text);
+
+  document.getElementById("qrResult").innerHTML =
+    `<img class="qr-img" src="${url}" alt="QR Code">`;
+}
+
+function toUpperCaseText() {
+  const text = document.getElementById("textInput").value;
+  document.getElementById("textResult").innerText = text.toUpperCase();
+}
+
+function toLowerCaseText() {
+  const text = document.getElementById("textInput").value;
+  document.getElementById("textResult").innerText = text.toLowerCase();
+}
+
+function toTitleCase() {
+  const text = document.getElementById("textInput").value;
+  const result = text
+    .toLowerCase()
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  document.getElementById("textResult").innerText = result;
+}
+
+function countWords() {
+  const text = document.getElementById("countInput").value.trim();
+
+  if (!text) {
+    document.getElementById("countResult").innerText = "Matn kiriting";
+    return;
+  }
+
+  const words = text.split(/\s+/).length;
+  const characters = text.length;
+
+  document.getElementById("countResult").innerText =
+    `So‘zlar: ${words} | Belgilar: ${characters}`;
+}
+</script>
 
 </body>
 </html>
